@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./react-crud-app
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./express-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    environment:
+      - NODE_ENV=production
+
+networks:
+  default:
+    driver: bridge
